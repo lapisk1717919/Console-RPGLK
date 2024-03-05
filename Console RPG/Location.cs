@@ -53,6 +53,7 @@ namespace Console_RPG
         }
         public void Resolve(List<Player> players)
         {
+            Console.WriteLine("");
             Console.WriteLine("You have arrived at the " + name);
             Console.WriteLine(description);
             Console.WriteLine("");

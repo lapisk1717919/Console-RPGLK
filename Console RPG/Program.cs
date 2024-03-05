@@ -7,6 +7,7 @@ namespace Console_RPG
     {
         static void Main(string[] args)
         {
+            //create locations
             Location.shop.SetNearbyLocations(north: Location.goblinCamp, east: Location.bridge, south: Location.creatureCave, west: Location.forest);
             Location.creatureCave.SetNearbyLocations(north: Location.shop /*add DOWN later*/);
             Location.goblinCamp.SetNearbyLocations(south: Location.shop);
@@ -14,7 +15,7 @@ namespace Console_RPG
             Location.cabin.SetNearbyLocations(south: Location.forest);
             Location.bridge.SetNearbyLocations(east: Location.castle, west: Location.shop);
             Location.castle.SetNearbyLocations(west: Location.bridge);
-
+            //start game
             Location.shop.Resolve(new List<Player>() { Player.player });
         }
     }

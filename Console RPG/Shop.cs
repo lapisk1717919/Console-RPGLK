@@ -18,51 +18,76 @@ namespace Console_RPG
         public override void Resolve(List<Player> players)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"SHOPKEEP: 'Welcome to my shop. I'm {ShopKeeperName}, take a look around.'");
-            Console.WriteLine("");
-            while (true)
+            Console.WriteLine("Enter shop or continue?");
+            Console.WriteLine("SHOP: Lapis' emporium");
+            Console.WriteLine("CONTINUE: Return to Compass");
+            string playerchoice = Console.ReadLine();
+            if (playerchoice == "SHOP")
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"SHOPKEEP: 'Welcome to my shop. I'm {ShopKeeperName}, take a look around.'");
                 Console.WriteLine("");
-                Console.WriteLine("What would you like to do?");
-                Console.WriteLine("BUY | TALK | LEAVE");
-                string userChoice = Console.ReadLine();
-                Console.WriteLine("");
-                //BUY
-                if (userChoice == "BUY")
+                while (true)
                 {
-                    Item item = ChooseItem(items);
-                    if (Player.CoinCount < item.shopPrice)
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("");
+                    Console.WriteLine("What would you like to do?");
+                    Console.WriteLine("BUY | TALK | LEAVE");
+                    string userChoice = Console.ReadLine();
+                    Console.WriteLine("");
+                    //BUY
+                    if (userChoice == "BUY")
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Can't afford item! (Costs {item.shopPrice}§, client has {Player.CoinCount}§)");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Item item = ChooseItem(items);
+                        if (Player.CoinCount < item.shopPrice)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"Can't afford item! (Costs {item.shopPrice}¢, client has {Player.CoinCount}¢)");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            Player.CoinCount -= item.shopPrice; //Spend money
+                            Player.Inventory.Add(item); //Get item
+                            Console.WriteLine($"You bought {item.name}."); //Tell user they got the item
+                        }
+                    }
+                    //TALK
+                    else if (userChoice == "TALK")
+                    {
+                        Console.WriteLine("SHOPKEEP: 'Sorry i'm not letting you sell items. It's already hard making a living in a land 5 locations wide.'");
+                    }
+                    else if (userChoice == "LEAVE")
+                    {
+                        Console.WriteLine("SHOPKEEP: 'Come back soon.'");
+                        break;
                     }
                     else
                     {
-                        Player.CoinCount -= item.shopPrice; //Spend money
-                        Player.Inventory.Add(item); //Get item
-                        Console.WriteLine($"You bought {item.name}."); //Tell user they got the item
+                        Console.WriteLine("Invalid input! Defaulting to LEAVE.");
                     }
                 }
-                //TALK
-                else if (userChoice == "TALK")
-                {
-                    Console.WriteLine("SHOPKEEP: 'Sorry i'm not letting you sell items. It's already hard making a living in a land 5 locations wide.'");
-                }
-                else if (userChoice == "LEAVE")
-                {
-                    Console.WriteLine("SHOPKEEP: 'Come back soon.'");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input! Defaulting to LEAVE.");
-                }
-                }
+            }
+            else if (playerchoice == "CONTINUE")
+            {
+                //putting nothing in here automatically breaks the if sooooo 
+            }
+            else if (playerchoice == "DEV")
+            {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine("Debug stats enabled.");
                 Console.ForegroundColor = ConsoleColor.White;
-
+                Player.player.stats.strength = 25;
+                Player.CoinCount = 300;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid input! Defaulting to CONTINUE");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public Item ChooseItem(List<Item> choices)
         {
@@ -71,7 +96,7 @@ namespace Console_RPG
             //print list of items in shop
             for (int i = 0; i < choices.Count; i++)
             {
-                Console.WriteLine($"{i + 1}.{choices[i].name} ({choices[i].shopPrice}§)");
+                Console.WriteLine($"{i + 1}.{choices[i].name} ({choices[i].shopPrice}¢)");
             }
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;

@@ -10,7 +10,7 @@ namespace Console_RPG
         public static List<Item> Inventory = new List<Item>() { HealthPotionItem.heal };
         public static int CoinCount = 0;
 
-        public static Player player = new Player("test", 50, 25, new Stats(13, 8, 4, 2), 10);
+        public static Player player = new Player("player", 50, 25, new Stats(13, 8, 4, 2), 10);
 
         public int cash;
         public int carrylimit;
@@ -54,14 +54,18 @@ namespace Console_RPG
         public override void PhysAttack(Entity target)
         {
             target.currentHP -= stats.strength - target.stats.defense;
-            //Console.WriteLine(name + " attacked " + target.name + "!");
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine($"{name} attacked {target.name}!");
             Console.WriteLine($"{name} dealt {stats.strength - target.stats.defense} damage!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public override void DoTurn(List<Player> players, List<Enemy> enemies)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"what does {name} do?");
             Console.WriteLine("ATTACK | ITEM");
+            Console.ForegroundColor = ConsoleColor.White;
             string choice = Console.ReadLine();
             if (choice == "ATTACK")
             {

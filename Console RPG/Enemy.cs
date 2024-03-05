@@ -24,6 +24,7 @@ namespace Console_RPG
         {
             target.currentHP -= stats.strength - target.stats.defense;
             Console.WriteLine($"{name} attacked {target.name}!");
+            Console.WriteLine($"{target.name} took {stats.strength - target.stats.defense} damage!");
         }
 
         public override void DoTurn(List<Player> players, List<Enemy> enemies)
