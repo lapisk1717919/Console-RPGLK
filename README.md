@@ -1,4 +1,4 @@
-# derek, squi1-rasb is my personal git that i added because i couldn't be bothered to log into my school one at home hope that doesnt mess anything up
+## squi1-rasb is my personal git that i added because i couldn't be bothered to log into my school one at home hope that doesnt mess anything up
 
 # Console RPG - Handout
 
